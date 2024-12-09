@@ -1,9 +1,9 @@
 import csv
-users=[{"password":"pwd","nom":"RITAL","prénom":"Reco","produits":{}},{"password":"pwd","nom":"RITAL","prénom":"Reco","produits":{}},{"password":"pwd","nom":"RITAL","prénom":"Reco","produits":{}},{"password":"pwd","nom":"RITAL","prénom":"Reco","produits":{}},{"password":"pwd","nom":"RITAL","prénom":"Reco","produits":{}}]
+users=[{"password":"pwd","nom":"RITAL","prénom":"Reco","produits":{}}]
 
 
 #Création des premieres fonctionalités:
-def nouvelle_utilisateur(nom,prénom,password,produits):
+def nouvel_utilisateur(nom,prénom,password,produits):
     users.append({"password":password,"nom":nom,"prénom":prénom,"produits":produits})
     return
 
@@ -26,10 +26,12 @@ def login(nom,prénom):
         for key in dic.keys():
             if key("nom")==nom and key("prénom")==prénom:
                 pwd=input("veuillez donner votre mot de passe")
+                if pwd==key("password"):
+                    print("vous êtes connecté(e)")
+                    return 
             else:
                 print("Casse-toi, je sais pas qui t'es!!!")
     return
-
 
 
 #Exportation du fichier csv:

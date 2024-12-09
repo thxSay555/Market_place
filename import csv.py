@@ -1,5 +1,5 @@
 import csv
-users=[{"password":"pwd","nom":"RITAL","prénom":"Reco","produits":{}}]
+users=[{"password":"pwd","nom":"RITAL","prénom":"Reco","produits":{}},{"password":"pwd","nom":"RITAL","prénom":"Reco","produits":{}},{"password":"pwd","nom":"RITAL","prénom":"Reco","produits":{}}]
 
 
 #Création des premieres fonctionalités:
@@ -11,7 +11,7 @@ def ajouter_produits(nom_user,nom_produits):
     for dic in users:
         for k in dic.keys():
             if k("nom")==nom_user:
-                k("produits")=nom_produits
+                k["produits"]=nom_produits
     return
 
 def supprimer_utilisateur(nom):
@@ -35,7 +35,10 @@ def login(nom,prénom):
 
 
 #Exportation du fichier csv:
-with open("essai.csv", 'w', newline='', encoding="utf-8") as fichier:
-    commerçant=csv.DictWriter(fichier, fieldnames=users[0].keys())
-    commerçant.writeheader()
-    commerçant.writerow(users)
+field=["password","nom","prénom","produits"]
+
+# Ouvrir le fichier CSV et écrire les lignes à partir des dictionnaires
+with open('essai.csv', 'w', newline='') as file:
+    commerçant = csv.DictWriter(file, fieldnames=field)
+    commerçant.writeheader()  # Écrit l'en-tête avec les noms des champs
+    commerçant.writerows(users)

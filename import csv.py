@@ -40,5 +40,5 @@ field=["password","nom","prénom","produits"]
 # Ouvrir le fichier CSV et écrire les lignes à partir des dictionnaires
 with open('essai.csv', 'w', newline='') as file:
     commerçant = csv.DictWriter(file, fieldnames=field)
-    commerçant.writeheader()  # Écrit l'en-tête avec les noms des champs
+    commerçant.writeheader()
     commerçant.writerows(users)

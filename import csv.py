@@ -14,6 +14,21 @@ def ajouter_produits(nom_user,nom_produits):
                 k("produits")=nom_produits
     return
 
+def supprimer_utilisateur(nom):
+    for dic in users:
+        for key in dic.keys():
+            if key("nom")==nom:
+                dic.clear()
+    return
+
+def login(nom,prénom):
+    for dic in users:
+        for key in dic.keys():
+            if key("nom")==nom and key("prénom")==prénom:
+                pwd=input("veuillez donner votre mot de passe")
+            else:
+                print("Casse-toi, je sais pas qui t'es!!!")
+    return
 
 
 

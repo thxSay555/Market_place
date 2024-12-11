@@ -1,4 +1,4 @@
-password,nom,prénom,produits
-pwd,RITAL,Reco,{}
-pwd,RITAL,Reco,{}
-pwd,RITAL,Reco,{}
+id,nom,prénom,password,produits
+0,admin,,admin,
+1,ABOU HARB,Elias,test123,"Pommes, Orange, Mango"
+2,FERAH,Jassym,Sgueg,Skibidi

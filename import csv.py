@@ -1,44 +1,73 @@
 import csv
-users=[{"password":"pwd","nom":"RITAL","prénom":"Reco","produits":{}},{"password":"pwd","nom":"RITAL","prénom":"Reco","produits":{}},{"password":"pwd","nom":"RITAL","prénom":"Reco","produits":{}}]
+users=[{"id":0,"nom":"admin","prénom":"","password":"admin","produits":None}]
+
+def tri_users_product(nom):
+    produits_tries={}
+    for user in users:
+        if nom == user["nom"]:
+            for product in user["produits"]:
+                sorted(product["prix"])
+    return produits_tries
 
 
-#Création des premieres fonctionalités:
-def nouvel_utilisateur(nom,prénom,password,produits):
-    users.append({"password":password,"nom":nom,"prénom":prénom,"produits":produits})
+def recherche(*elmt):
+
     return
 
-def ajouter_produits(nom_user,nom_produits):
+
+def nouvel_utilisateur(nom,prénom,password,produits):
+    new_id=users[-1]["id"]+1
+    users.append({"id":new_id,"password":password,"nom":nom,"prénom":prénom,"produits":produits})
+    return
+
+def ajouter_produits(nom_user,produits):
     for dic in users:
-        for k in dic.keys():
-            if k("nom")==nom_user:
-                k["produits"]=nom_produits
+        if dic["nom"]==nom_user:
+            dic["produits"].append(produits)
+    return
+
+def tri_produits(id,produits):
     return
 
 def supprimer_utilisateur(nom):
     for dic in users:
         for key in dic.keys():
-            if key("nom")==nom:
+            if key["nom"]==nom:
                 dic.clear()
     return
 
 def login(nom,prénom):
     for dic in users:
         for key in dic.keys():
-            if key("nom")==nom and key("prénom")==prénom:
+            if key["nom"]==nom and key["prénom"]==prénom:
                 pwd=input("veuillez donner votre mot de passe")
                 if pwd==key("password"):
                     print("vous êtes connecté(e)")
                     return 
             else:
-                print("Casse-toi, je sais pas qui t'es!!!")
+                print("Je sais pas qui t'es!!!")
     return
+
+print(users[0]["nom"])
+
+nouvel_utilisateur("ABOU HARB","Elias","test123","Pommes, Orange, Mango")
+nouvel_utilisateur("FERAH","Jassym","Sgueg","Skibidi")
+
+
+
+
+
+
+
 
 
 #Exportation du fichier csv:
-field=["password","nom","prénom","produits"]
+field=["id","nom","prénom","password","produits"]
 
 # Ouvrir le fichier CSV et écrire les lignes à partir des dictionnaires
 with open('essai.csv', 'w', newline='') as file:
     commerçant = csv.DictWriter(file, fieldnames=field)
     commerçant.writeheader()
     commerçant.writerows(users)
+
+

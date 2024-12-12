@@ -17,7 +17,8 @@ def tri_fusion_produits(produits, cle):
 
 def fusion(gauche, droite, cle):
     liste_triée = []
-    i = j = 0
+    i = 0
+    j = 0
 
     while i < len(gauche) and j < len(droite):
         if gauche[i][cle] <= droite[j][cle]:

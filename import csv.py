@@ -1,4 +1,6 @@
 import csv
+
+
 users=[{"id":0,"nom":"admin","prénom":None,"password":"admin","produits":None}]
 list_product=[{}]
 
@@ -59,10 +61,23 @@ nouvel_utilisateur("FERAH","Jassym","Sgueg","Skibidi")
 
 
 
+def main():
+    while True:
+        choix=int(input("Il faut entrer un choix entre 1-4 \n "))
+        if choix==1:
+            ajouter_produits(id,"biscotte")
+        if choix==2:
+            ajouter_produits(id,"bicotte")
+        if choix==3:
+            ajouter_produits(id,"biscotte")
+        if choix==4:
+            ajouter_produits(id,"biscotte")
+        else:
+            print("Choix invalide")
 
 
-
-
+if __name__ == "__main__":
+    main()
 
 
 #Exportation du fichier csv:

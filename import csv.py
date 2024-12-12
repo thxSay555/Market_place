@@ -22,11 +22,13 @@ def tri_users_product(nom):
     return produits_tries
 
 
-def recherche(nom_produit):
+def recherche():
+    nom_produit=input("Que recherchez vous ?(le nom exact)\n")
     for prod in list_product:
         if prod["nom_du_produit"]==nom_produit:
             return prod
-    return "Ce nom de produit n'est pas dans notre base de données"
+    print("Ce nom de produit n'est pas dans notre base de données")
+    return 
 
 
 def nouvel_utilisateur():
@@ -77,7 +79,7 @@ def login(nom,prénom):
 
 def main():
     while True:
-        print("Vous avez 4 options:\n1:ajouter un produits\n2:supprimer un utilisateur\n3:ajouter un utilisateur\n4:sortir du menu\n")
+        print("Vous avez 5 options:\n1:ajouter un produits\n2:supprimer un utilisateur\n3:ajouter un utilisateur\n4:rechercher un produit\n5:sortir du menu\n")
         choix=int(input("Il faut entrer un choix entre 1-4 \n "))
         if choix==1:
             ajouter_produits()
@@ -86,6 +88,9 @@ def main():
         elif choix==3:
             nouvel_utilisateur()
         elif choix==4:
+            recherche()
+
+        elif choix==5:
             print("See u!!!")
             break
             

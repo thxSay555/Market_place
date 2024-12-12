@@ -1,5 +1,9 @@
 import csv
-users=[{"id":0,"nom":"admin","prénom":"","password":"admin","produits":None}]
+users=[{"id":0,"nom":"admin","prénom":None,"password":"admin","produits":None}]
+list_product=[{}]
+
+
+
 
 def tri_users_product(nom):
     produits_tries={}
@@ -20,10 +24,10 @@ def nouvel_utilisateur(nom,prénom,password,produits):
     users.append({"id":new_id,"password":password,"nom":nom,"prénom":prénom,"produits":produits})
     return
 
-def ajouter_produits(nom_user,produits):
-    for dic in users:
-        if dic["nom"]==nom_user:
-            dic["produits"].append(produits)
+def ajouter_produits(id,*produits):
+    for user in users:
+        if user["id"]==id:
+            list_product.append(produits)
     return
 
 def tri_produits(id,produits):

@@ -1,8 +1,14 @@
 import csv
 
 
-users=[{"id":0,"nom":"admin","prénom":None,"password":"admin","produits":None}]
-list_product=[{}]
+users=[{"id":0,"nom":"admin","prénom":None,"password":"admin","produits":None}
+]
+list_product=[
+    {"nom_du_produit": "A", "prix": 10.5, "quantité": 5, "id":0},
+    {"nom_du_produit": "B", "prix": 7.2, "quantité": 8, "id":3},
+    {"nom_du_produit": "C", "prix": 15.0, "quantité": 2, "id":5},
+    {"nom_du_produit": "D", "prix": 3.8, "quantité": 10, "id":0},
+]
 
 
 
@@ -16,20 +22,32 @@ def tri_users_product(nom):
     return produits_tries
 
 
-def recherche(*elmt):
+def recherche(nom_produit):
+    for prod in list_product:
+        if prod["nom_du_produit"]==nom_produit:
+            return prod
+    return "Ce nom de produit n'est pas dans notre base de données"
 
-    return
 
-
-def nouvel_utilisateur(nom,prénom,password,produits):
+def nouvel_utilisateur():
     new_id=users[-1]["id"]+1
-    users.append({"id":new_id,"password":password,"nom":nom,"prénom":prénom,"produits":produits})
+    users.append({"id":new_id,"password":input("password \n"),"nom":input("nom \n"),"prénom":input("prénom \n"),"produits":id})
     return
 
-def ajouter_produits(id,*produits):
+def ajouter_produits():
+    id=input("id, s'il vous plait \n")
+    nom_prod=str(input("Comment s'appel le produits? \n"))
+    prix=float(input("prix ? \n"))
+    quantité=int(input("Quelle est la quantité? \n"))
+    prod={"nom_du_produit":nom_prod,"prix":prix, "quantité":quantité, "id":id}
     for user in users:
         if user["id"]==id:
-            list_product.append(produits)
+            list_product.append(prod)
+    ajouter_encore=input("Voulez vous ajouter un autre produit? \n Oui:1\n Non:0\n")
+    if ajouter_encore ==1:
+        ajouter_produits()
+    elif ajouter_encore==0:
+        print("See u!!!")
     return
 
 def tri_produits(id,produits):
@@ -54,24 +72,23 @@ def login(nom,prénom):
                 print("Je sais pas qui t'es!!!")
     return
 
-print(users[0]["nom"])
-
-nouvel_utilisateur("ABOU HARB","Elias","test123","Pommes, Orange, Mango")
-nouvel_utilisateur("FERAH","Jassym","Sgueg","Skibidi")
 
 
 
 def main():
     while True:
+        print("Vous avez 4 options:\n1:ajouter un produits\n2:supprimer un utilisateur\n3:ajouter un utilisateur\n4:sortir du menu\n")
         choix=int(input("Il faut entrer un choix entre 1-4 \n "))
         if choix==1:
-            ajouter_produits(id,"biscotte")
-        if choix==2:
-            ajouter_produits(id,"bicotte")
-        if choix==3:
-            ajouter_produits(id,"biscotte")
-        if choix==4:
-            ajouter_produits(id,"biscotte")
+            ajouter_produits()
+        elif choix==2:
+            supprimer_utilisateur()
+        elif choix==3:
+            nouvel_utilisateur()
+        elif choix==4:
+            print("See u!!!")
+            break
+            
         else:
             print("Choix invalide")
 

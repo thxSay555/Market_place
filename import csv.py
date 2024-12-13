@@ -1,19 +1,19 @@
 import csv
 
 
-users=[{"id":0,"nom":"admin","prénom":None,"password":"admin","produits":None}
+users=[{"id":0,"nom":"admin","prénom":None,"password":"admin","e-mail":"tkt"}
 ]
 list_product=[
-    {"nom_du_produit": "A", "prix": 10.5, "quantité": 5, "id":0},
-    {"nom_du_produit": "B", "prix": 7.2, "quantité": 8, "id":3},
-    {"nom_du_produit": "C", "prix": 15.0, "quantité": 2, "id":5},
-    {"nom_du_produit": "D", "prix": 3.8, "quantité": 10, "id":0},
+    {"nom_du_produit": "ananas", "prix": 10.5, "quantité": 5, "id_marchand":0},
+    {"nom_du_produit": "bannanes", "prix": 7.2, "quantité": 8, "id_marchand":3},
+    {"nom_du_produit": "pommes", "prix": 15.0, "quantité": 2, "id_marchand":5},
+    {"nom_du_produit": "what the heck", "prix": 3.8, "quantité": 10, "id_marchand":0},
 ]
 
 
 
 
-def tri_users_product(nom):
+def tri_users_product():
     produits_tries={}
     for user in users:
         if nom == user["nom"]:
@@ -26,6 +26,7 @@ def recherche():
     nom_produit=input("Que recherchez vous ?(le nom exact)\n")
     for prod in list_product:
         if prod["nom_du_produit"]==nom_produit:
+            print(prod)
             return prod
     print("Ce nom de produit n'est pas dans notre base de données")
     return 
@@ -33,7 +34,7 @@ def recherche():
 
 def nouvel_utilisateur():
     new_id=users[-1]["id"]+1
-    users.append({"id":new_id,"password":input("password \n"),"nom":input("nom \n"),"prénom":input("prénom \n"),"produits":id})
+    users.append({"id":new_id,"password":input("password \n"),"nom":input("nom \n"),"prénom":input("prénom \n"),"e-mail":input("e-mail")})
     return
 
 def ajouter_produits():
@@ -41,7 +42,7 @@ def ajouter_produits():
     nom_prod=str(input("Comment s'appel le produits? \n"))
     prix=float(input("prix ? \n"))
     quantité=int(input("Quelle est la quantité? \n"))
-    prod={"nom_du_produit":nom_prod,"prix":prix, "quantité":quantité, "id":id}
+    prod={"nom_du_produit":nom_prod,"prix":prix, "quantité":quantité, "id_marchand":id}
     for user in users:
         if user["id"]==id:
             list_product.append(prod)
@@ -80,7 +81,7 @@ def login(nom,prénom):
 def main():
     while True:
         print("Vous avez 5 options:\n1:ajouter un produits\n2:supprimer un utilisateur\n3:ajouter un utilisateur\n4:rechercher un produit\n5:sortir du menu\n")
-        choix=int(input("Il faut entrer un choix entre 1-4 \n "))
+        choix=int(input("Il faut entrer un choix entre 1-5 \n "))
         if choix==1:
             ajouter_produits()
         elif choix==2:
@@ -103,7 +104,7 @@ if __name__ == "__main__":
 
 
 #Exportation du fichier csv:
-field=["id","nom","prénom","password","produits"]
+field=["id","nom","prénom","password","e-mail"]
 
 # Ouvrir le fichier CSV et écrire les lignes à partir des dictionnaires
 with open('essai.csv', 'w', newline='') as file:

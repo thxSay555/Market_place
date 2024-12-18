@@ -1,8 +1,11 @@
-from ..Market_place import Fonction_tri_test
+from Fonction_tri_test import tri_fusion_produits
 import csv
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import tkinter as tk
+
+
 
 # Liste des utilisateurs existants
 users = [{"id": 0, "nom": "admin", "prénom": None, "password": "admin", "e-mail": "tkt"}]
@@ -37,7 +40,7 @@ def envoyer_email(destinataire, sujet, message):
     try:
         with smtplib.SMTP('smtp.gmail.com', 587) as server: 
             server.starttls()
-            server.login('ilyass.boinahery.cpge@gmail.com', 'Tadjidine2')  
+            server.login('', '')  
             server.sendmail(msg['From'], msg['To'], msg.as_string())
             print(f"E-mail envoyé à {destinataire}")
     except Exception as e:
@@ -64,7 +67,20 @@ def nouvel_utilisateur():
 
 # Fonction main du code
 def main():
+    def on_button_click():
+        label.config(text='Button clicked')
+        root=tk.Tk()
+    root.title("Simple GUI")
+
+    label = tk.Label(root, text="Hello the woorlldoOO00!!!!")
+    label.pack(pady=20)
+
+    button = tk.Button(root, text="Click me now!!!!", command=on_button_click)
+    label.pack(pady=10)
+    root.mainloop()
+    
     while True:
+        
         print("Vous avez 5 options:\n1:ajouter un produit\n2:supprimer un utilisateur\n3:ajouter un utilisateur\n4:rechercher un produit\n5:sortir du menu\n")
         choix = int(input("Il faut entrer un choix entre 1-5 \n "))
         if choix == 1:
@@ -81,10 +97,16 @@ def main():
         else:
             print("Choix invalide")
 
+
+
+
+
+
+
 if __name__ == "__main__":
     main()
 
-# Exportation du fichier CSV
+# Exportation du fichier CSV users
 field = ["id", "nom", "prénom", "password", "e-mail"]
 
 with open('essai.csv', 'w', newline='') as file:

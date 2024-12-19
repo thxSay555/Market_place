@@ -1,3 +1,5 @@
+import tkinter as tk
+from tkinter import messagebox
 from Fonction_tri_test import tri_fusion_produits
 import csv
 import smtplib
@@ -46,27 +48,32 @@ def envoyer_email(destinataire, sujet, message):
 # Fonction pour ajouter un nouvel utilisateur
 def nouvel_utilisateur():
     new_id = users[-1]["id"] + 1
-    password = input("password \n")
+    password = password_entry.get()
     
     # Vérification si le mot de passe est compromis
     if est_compromis(password):
-        email = input("Entrez votre e-mail: \n")
+        email = email_entry.get()
         message = f"Attention, le mot de passe que vous avez choisi est compromis. Veuillez en choisir un autre."
         envoyer_email(email, "Avertissement de sécurité", message)
-        print("Le mot de passe est compromis, un e-mail vous a été envoyé.")
+        messagebox.showwarning("Avertissement", "Le mot de passe est compromis, un e-mail vous a été envoyé.")
     else:
-        nom = input("nom \n")
-        prénom = input("prénom \n")
-        email = input("e-mail \n")
+        nom = nom_entry.get()
+        prénom = prénom_entry.get()
+        email = email_entry.get()
         users.append({"id": new_id, "password": password, "nom": nom, "prénom": prénom, "e-mail": email})
-        print("Utilisateur ajouté avec succès.")
+        messagebox.showinfo("Succès", "Utilisateur ajouté avec succès.")
     return
 
-# Fonction main du code
-def main():
-    while True:
-        print("Vous avez 5 options:\n1:ajouter un produit\n2:supprimer un utilisateur\n3:ajouter un utilisateur\n4:rechercher un produit\n5:sortir du menu\n")
-        choix = int(input("Il faut entrer un choix entre 1-5 \n "))
+# Fonction pour quitter le programme
+def quitter():
+    root.quit()
+
+# Fonction pour afficher le menu principal
+def afficher_menu():
+    menu_window = tk.Toplevel(root)
+    menu_window.title("Menu Principal")
+
+    def choisir_action(choix):
         if choix == 1:
             ajouter_produits()
         elif choix == 2:
@@ -76,13 +83,49 @@ def main():
         elif choix == 4:
             recherche()
         elif choix == 5:
-            print("See u!!!")
-            break
-        else:
-            print("Choix invalide")
+            quitter()
 
-if __name__ == "__main__":
-    main()
+    tk.Label(menu_window, text="Vous avez 5 options:").pack()
+
+    btn_ajouter_produit = tk.Button(menu_window, text="Ajouter un produit", command=lambda: choisir_action(1))
+    btn_ajouter_produit.pack()
+
+    btn_supprimer_utilisateur = tk.Button(menu_window, text="Supprimer un utilisateur", command=lambda: choisir_action(2))
+    btn_supprimer_utilisateur.pack()
+
+    btn_ajouter_utilisateur = tk.Button(menu_window, text="Ajouter un utilisateur", command=lambda: choisir_action(3))
+    btn_ajouter_utilisateur.pack()
+
+    btn_rechercher_produit = tk.Button(menu_window, text="Rechercher un produit", command=lambda: choisir_action(4))
+    btn_rechercher_produit.pack()
+
+    btn_quitter = tk.Button(menu_window, text="Quitter", command=lambda: choisir_action(5))
+    btn_quitter.pack()
+
+# Fonction d'ajout de produit (simplifiée pour l'exemple)
+def ajouter_produits():
+    print("Ajouter un produit...")
+    # Implémenter l'ajout de produits ici
+
+# Fonction de suppression d'utilisateur (simplifiée pour l'exemple)
+def supprimer_utilisateur():
+    print("Supprimer un utilisateur...")
+    # Implémenter la suppression d'un utilisateur ici
+
+# Fonction de recherche de produits (simplifiée pour l'exemple)
+def recherche():
+    print("Rechercher un produit...")
+    # Implémenter la recherche de produits ici
+
+# Fenêtre principale
+root = tk.Tk()
+root.title("Menu Principal")
+root.geometry("300x200")
+
+# Afficher le menu
+afficher_menu()
+
+root.mainloop()
 
 # Exportation du fichier CSV
 field = ["id", "nom", "prénom", "password", "e-mail"]

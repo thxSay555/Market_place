@@ -1,8 +1,8 @@
 from turtle import *
-
+speed(0.00099999)
 def yin(radius, color1, color2):
     width(3)
-    color("black", color1)
+    color("gray", color1)
     begin_fill()
     circle(radius/2., 180)
     circle(radius, 180)
@@ -23,11 +23,12 @@ def yin(radius, color1, color2):
     backward(radius*0.35)
     down()
     left(90)
+    yin(radius/2, "black", "white")
 
 def main():
     reset()
-    yin(200, "black", "white")
-    yin(200, "white", "black")
+    yin(500, "black", "white")
+    yin(500, "white", "black")
     ht()
     return "Done!"
 

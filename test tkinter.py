@@ -17,6 +17,10 @@ list_product = [
     {"nom_du_produit": "What the heck", "prix": 3.8, "quantité": 10, "id_marchand": 0},
 ]
 
+def afficher_message(message):
+    message_text.insert(tk.END, message+ "\n")
+    message_text.see(tk.END)
+    
 # Fonction pour vérifier si le mot de passe est compromis
 def est_compromis(mot_de_passe):
     try:
@@ -24,8 +28,9 @@ def est_compromis(mot_de_passe):
             compromised_passwords = f.read().splitlines()
         return mot_de_passe in compromised_passwords
     except FileNotFoundError:
-        print("Le fichier des mots de passe compromis n'a pas été trouvé.")
+        afficher_message("Le fichier des mots de passe compromis n'a pas été trouvé.")
         return False
+
 
 # Fonction pour envoyer un e-mail d'avertissement
 def envoyer_email(destinataire, sujet, message):
@@ -41,9 +46,9 @@ def envoyer_email(destinataire, sujet, message):
             server.starttls()
             server.login('')  
             server.sendmail(msg['From'], msg['To'], msg.as_string())
-            print(f"E-mail envoyé à {destinataire}")
+            afficher_message(f"E-mail envoyé à {destinataire}")
     except Exception as e:
-        print(f"Erreur lors de l'envoi de l'e-mail : {e}")
+        afficher_message(f"Erreur lors de l'envoi de l'e-mail : {e}")
 
 # Fonction pour ajouter un nouvel utilisateur
 def nouvel_utilisateur():
@@ -104,17 +109,17 @@ def afficher_menu():
 
 # Fonction d'ajout de produit (simplifiée pour l'exemple)
 def ajouter_produits():
-    print("Ajouter un produit...")
+    afficher_message("Ajouter un produit...")
     # Implémenter l'ajout de produits ici
 
 # Fonction de suppression d'utilisateur (simplifiée pour l'exemple)
 def supprimer_utilisateur():
-    print("Supprimer un utilisateur...")
+    afficher_message("Supprimer un utilisateur...")
     # Implémenter la suppression d'un utilisateur ici
 
 # Fonction de recherche de produits (simplifiée pour l'exemple)
 def recherche():
-    print("Rechercher un produit...")
+    afficher_message("Rechercher un produit...")
     # Implémenter la recherche de produits ici
 
 # Fenêtre principale

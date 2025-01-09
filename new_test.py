@@ -1,8 +1,9 @@
-from Fonction_tri_test import tri_fusion_produits
+import Fonction_tri_test
 import csv
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+
 
 # Liste des utilisateurs existants
 users = [{"id": 0, "nom": "admin", "prénom": None, "password": "admin", "e-mail": "tkt"}]
@@ -37,7 +38,7 @@ def envoyer_email(destinataire, sujet, message):
     try:
         with smtplib.SMTP('smtp.gmail.com', 587) as server: 
             server.starttls()
-            server.login('')  
+            server.login('ilyass.boinahery.cpge@gmail.com', 'Tadjidine2')  
             server.sendmail(msg['From'], msg['To'], msg.as_string())
             print(f"E-mail envoyé à {destinataire}")
     except Exception as e:
@@ -62,9 +63,22 @@ def nouvel_utilisateur():
         print("Utilisateur ajouté avec succès.")
     return
 
+def login():
+    e_mail=input("e-mail\n")
+    mot_de_passe=input("mot de passe\n")
+    for dic in users:
+        if dic["e-mail"] == e_mail and dic["password"] == mot_de_passe:
+            print("Vous êtes connecté(e)")
+            return
+        else:
+            print("Identifiants incorects")
+            return login()
+
 # Fonction main du code
 def main():
+    
     while True:
+        login()
         print("Vous avez 5 options:\n1:ajouter un produit\n2:supprimer un utilisateur\n3:ajouter un utilisateur\n4:rechercher un produit\n5:sortir du menu\n")
         choix = int(input("Il faut entrer un choix entre 1-5 \n "))
         if choix == 1:

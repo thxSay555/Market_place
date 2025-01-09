@@ -3,6 +3,12 @@ import csv
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import hashlib
+import requests
+import pandas
+
+#Pwned API
+
 
 
 # Liste des utilisateurs existants
@@ -17,14 +23,28 @@ list_product = [
 ]
 
 # Fonction pour vérifier si le mot de passe est compromis
-def est_compromis(mot_de_passe):
-    try:
-        with open('compromised_passwords.txt', 'r') as f:
-            compromised_passwords = f.read().splitlines()
-        return mot_de_passe in compromised_passwords
-    except FileNotFoundError:
-        print("Le fichier des mots de passe compromis n'a pas été trouvé.")
-        return False
+def est_compromis(password):
+    sha1_hash = hashlib.sha1(password.encode('utf-8')).hexdigest().upper()
+    prefix = sha1_hash[:5]
+    suffix = sha1_hash[5:]
+
+    url=f"https://api.pwnedpasswords.com/range/{prefix}"
+    response=requests.get(url)
+
+    if response.status_code !=200:
+        raise RuntimeError(f"Error: {response.status_code}")
+
+    found = False
+    hashes = (line.split(':') for line in response.text.splitlines())
+    for returned_suffix, count in hashes:
+        if returned_suffix == suffix:
+            print("Il claqué au sol ce mot de passe!!!\nFaut en trouver un autre.\n")
+            found=True
+            return False
+    if not found:
+        print("Très bon mot de passe!!!")
+    return
+
 
 # Fonction pour envoyer un e-mail d'avertissement
 def envoyer_email(destinataire, sujet, message):
